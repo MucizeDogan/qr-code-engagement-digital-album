@@ -1,0 +1,388 @@
+:root {
+  --ink: #211a1c;
+  --muted: #665b5f;
+  --paper: #fff9f4;
+  --paper-strong: #fff;
+  --rose: #a8485c;
+  --rose-dark: #7f2f42;
+  --sage: #61715e;
+  --champagne: #f0d5bd;
+  --line: rgba(33, 26, 28, 0.14);
+  --shadow: 0 22px 60px rgba(43, 25, 30, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: grid;
+  place-items: end center;
+  padding: 28px 20px 56px;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(24, 16, 18, 0.18), rgba(24, 16, 18, 0.54)),
+    url("assets/irem-dogan.jpg") center / cover no-repeat,
+    #6d5658;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 34%;
+  background: linear-gradient(transparent, var(--paper));
+  pointer-events: none;
+}
+
+.hero__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 24%, rgba(255, 236, 219, 0.16), transparent 35%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.28));
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: min(720px, 100%);
+  text-align: center;
+  color: white;
+  text-shadow: 0 3px 26px rgba(0, 0, 0, 0.38);
+}
+
+.hero__date,
+.eyebrow {
+  margin: 0 0 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(4rem, 18vw, 8.5rem);
+  line-height: 0.82;
+  letter-spacing: 0;
+}
+
+.hero__message {
+  width: min(560px, 100%);
+  margin: 22px auto 0;
+  font-size: clamp(1.04rem, 3.8vw, 1.35rem);
+  line-height: 1.55;
+  font-weight: 600;
+}
+
+.button {
+  min-height: 54px;
+  border: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(168, 72, 92, 0.32);
+  outline-offset: 3px;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button--primary {
+  background: var(--rose);
+  color: white;
+  box-shadow: 0 16px 35px rgba(168, 72, 92, 0.34);
+}
+
+.button--primary:hover {
+  background: var(--rose-dark);
+}
+
+.button--secondary {
+  width: min(280px, 100%);
+  background: var(--paper-strong);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--rose-dark);
+  border: 1px solid rgba(168, 72, 92, 0.32);
+}
+
+.hero__button {
+  margin-top: 30px;
+  min-width: min(290px, 100%);
+  font-size: 1.05rem;
+}
+
+.share,
+.panel,
+.thanks {
+  padding: 70px 20px;
+}
+
+.share__inner,
+.panel__inner,
+.thanks__inner {
+  width: min(760px, 100%);
+  margin: 0 auto;
+}
+
+.share__inner,
+.thanks__inner {
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--sage);
+}
+
+h2 {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.35rem, 9vw, 4.4rem);
+  line-height: 0.94;
+  letter-spacing: 0;
+}
+
+.share__copy,
+.thanks p,
+.upload__status {
+  margin: 18px auto 0;
+  max-width: 590px;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.share__actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+
+.panel {
+  background: var(--paper-strong);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0 18px;
+}
+
+.summary__item {
+  min-height: 78px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdfb;
+}
+
+.summary__value {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.summary__label {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.media-list {
+  display: grid;
+  gap: 12px;
+}
+
+.media-item {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdfb;
+}
+
+.media-item__preview {
+  width: 76px;
+  aspect-ratio: 1;
+  border-radius: 7px;
+  object-fit: cover;
+  background: var(--champagne);
+}
+
+.media-item__title {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-weight: 800;
+}
+
+.media-item__meta {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.media-item__remove {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: white;
+  color: var(--rose-dark);
+  cursor: pointer;
+}
+
+.panel__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.guest-form {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.guest-form label {
+  font-weight: 800;
+}
+
+.guest-form input {
+  width: 100%;
+  min-height: 58px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 16px;
+  background: #fffdfb;
+  color: var(--ink);
+}
+
+.progress {
+  width: 100%;
+  height: 14px;
+  margin-top: 28px;
+  border-radius: 999px;
+  background: rgba(168, 72, 92, 0.12);
+  overflow: hidden;
+}
+
+.progress__bar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--rose);
+  transition: width 220ms ease;
+}
+
+.thanks {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(rgba(255, 249, 244, 0.88), rgba(255, 249, 244, 0.95)),
+    url("assets/irem-dogan.jpg") center / cover no-repeat,
+    var(--paper);
+}
+
+.thanks .button {
+  margin-top: 24px;
+}
+
+.hidden,
+.visually-hidden {
+  display: none !important;
+}
+
+@media (max-width: 620px) {
+  .hero {
+    min-height: 92svh;
+    padding: 22px 16px 44px;
+  }
+
+  .share,
+  .panel,
+  .thanks {
+    padding: 52px 16px;
+  }
+
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .media-item {
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  .media-item__preview {
+    width: 64px;
+  }
+
+  .panel__actions,
+  .share__actions {
+    display: grid;
+  }
+
+  .button--secondary,
+  .panel__actions .button {
+    width: 100%;
+  }
+}

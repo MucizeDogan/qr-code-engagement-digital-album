@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="&#304;rem ve Do&#287;an'&#305;n ni&#351;an t&#246;reni dijital an&#305; alb&#252;m&#252;."
+    />
+    <title>&#304;rem &amp; Do&#287;an | An&#305; Alb&#252;m&#252;</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app" id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__shade"></div>
+        <div class="hero__content">
+          <p class="hero__date">08.08.2026</p>
+          <h1 id="hero-title">&#304;REM &amp; DO&#286;AN</h1>
+          <p class="hero__message">
+            Bu mutlu g&#252;n&#252;m&#252;zde bizi yaln&#305;z b&#305;rakmad&#305;&#287;&#305;n i&#231;in sana &#231;ok te&#351;ekk&#252;r
+            ediyoruz.&#128525;
+          </p>
+          <a class="button button--primary hero__button" href="#share">
+            An&#305;lar&#305;n&#305; Payla&#351;
+          </a>
+        </div>
+      </section>
+
+      <section class="share" id="share" aria-labelledby="share-title">
+        <div class="share__inner">
+          <p class="eyebrow">Dijital an&#305; alb&#252;m&#252;</p>
+          <h2 id="share-title">Yakalad&#305;&#287;&#305;n&#305;z foto&#287;raflar&#305; ve videolar&#305; payla&#351;&#305;n!</h2>
+          <p class="share__copy">
+            Galerinden birden fazla dosya se&#231;ebilir, y&#252;klemeden &#246;nce hepsini
+            kontrol edebilirsin.
+          </p>
+
+          <div class="share__actions">
+            <button class="button button--secondary" type="button" id="photoButton">
+              <span aria-hidden="true">&#128247;</span>
+              Foto&#287;raf Payla&#351;
+            </button>
+            <button class="button button--secondary" type="button" id="videoButton">
+              <span aria-hidden="true">&#127909;</span>
+              Video Payla&#351;
+            </button>
+          </div>
+
+          <input
+            class="visually-hidden"
+            id="photoInput"
+            type="file"
+            accept="image/*"
+            multiple
+          />
+          <input
+            class="visually-hidden"
+            id="videoInput"
+            type="file"
+            accept="video/*"
+            multiple
+          />
+        </div>
+      </section>
+
+      <section class="panel hidden" id="review" aria-labelledby="review-title">
+        <div class="panel__inner">
+          <p class="eyebrow">Se&#231;ilen an&#305;lar</p>
+          <h2 id="review-title">Payla&#351;madan &#246;nce son kontrol</h2>
+          <div class="summary" id="fileSummary"></div>
+          <div class="media-list" id="mediaList" aria-live="polite"></div>
+          <div class="panel__actions">
+            <button class="button button--ghost" type="button" id="addMoreButton">
+              Daha fazla ekle
+            </button>
+            <button class="button button--primary" type="button" id="continueButton">
+              Devam et
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="guest" aria-labelledby="guest-title">
+        <div class="panel__inner">
+          <p class="eyebrow">Son ad&#305;m</p>
+          <h2 id="guest-title">Seni nas&#305;l hat&#305;rlayal&#305;m?</h2>
+          <form class="guest-form" id="guestForm">
+            <label for="guestName">&#304;sim soyisim</label>
+            <input
+              id="guestName"
+              name="guestName"
+              type="text"
+              autocomplete="name"
+              placeholder="&#214;rn. Ay&#351;e Y&#305;lmaz"
+              required
+              minlength="2"
+            />
+            <button class="button button--primary" type="submit">
+              An&#305;lar&#305; Y&#252;kle
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="upload" aria-labelledby="upload-title">
+        <div class="panel__inner">
+          <p class="eyebrow">Y&#252;kleniyor</p>
+          <h2 id="upload-title">An&#305;lar&#305;n alb&#252;m&#252;m&#252;ze ekleniyor</h2>
+          <div class="progress" aria-label="Y&#252;kleme ilerlemesi">
+            <div class="progress__bar" id="progressBar"></div>
+          </div>
+          <p class="upload__status" id="uploadStatus">Haz&#305;rlan&#305;yor...</p>
+        </div>
+      </section>
+
+      <section class="thanks hidden" id="thanks" aria-labelledby="thanks-title">
+        <div class="thanks__inner">
+          <p class="eyebrow">Te&#351;ekk&#252;rler</p>
+          <h2 id="thanks-title">An&#305;lar&#305;n bizim i&#231;in &#231;ok de&#287;erli.</h2>
+          <p>
+            Bu g&#252;zel g&#252;n&#252; senin g&#246;z&#252;nden de hat&#305;rlayaca&#287;&#305;z. &#304;yi ki bizimlesin.
+          </p>
+          <a class="button button--primary" href="#top">Ba&#351;a d&#246;n</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
