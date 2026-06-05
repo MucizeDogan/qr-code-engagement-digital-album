@@ -51,6 +51,10 @@
               <span aria-hidden="true">&#127909;</span>
               Video Payla&#351;
             </button>
+            <button class="button button--secondary" type="button" id="noteButton">
+              <span aria-hidden="true">📝</span>
+              Not Paylaş
+            </button>
           </div>
 
           <input
@@ -67,6 +71,7 @@
             accept="video/*"
             multiple
           />
+          
         </div>
       </section>
 
@@ -130,6 +135,38 @@
           <a class="button button--primary" href="#top">Ba&#351;a d&#246;n</a>
         </div>
       </section>
+
+      <div class="note-modal hidden" id="noteModal">
+  <div class="note-modal__content">
+    <h3>Bir not bırak</h3>
+
+<label for="noteGuestName">İsim Soyisim</label>
+
+<input
+  id="noteGuestName"
+  type="text"
+  placeholder="Örn. Ayşe Yılmaz"
+/>
+
+    <textarea
+      id="noteText"
+      rows="15"
+      cols="48"
+      placeholder="İrem ve Doğan için mesajını yaz..."
+    ></textarea>
+
+    <div class="note-modal__actions">
+      <button type="button" id="cancelNoteButton" class="button button--ghost">
+        Vazgeç
+      </button>
+
+      <button type="button" id="saveNoteButton" class="button button--primary">
+        Notu Ekle
+      </button>
+    </div>
+  </div>
+  </div>
+      
     </main>
 
     <script src="script.js"></script>

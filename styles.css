@@ -351,6 +351,174 @@ h2 {
   display: none !important;
 }
 
+
+.note-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1rem;
+  z-index: 9999;
+}
+
+.note-modal.hidden {
+  display: none;
+}
+
+.note-modal__content {
+  width: 100%;
+  max-width: 550px;
+
+  background: #ffffff;
+  border-radius: 24px;
+
+  padding: 1.5rem;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 8px 16px rgba(0, 0, 0, 0.08);
+
+  animation: noteModalFade 0.25s ease;
+}
+
+.note-modal__content h3 {
+  margin: 0 0 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #2f2f2f;
+}
+
+#noteText {
+  width: 100%;
+  min-height: 180px;
+
+  resize: vertical;
+
+  padding: 1rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 16px;
+
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: inherit;
+
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+#noteText:focus {
+  border-color: #c8a97e;
+  box-shadow: 0 0 0 4px rgba(200, 169, 126, 0.15);
+}
+
+.note-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+
+  margin-top: 1rem;
+}
+
+#cancelNoteButton,
+#saveNoteButton {
+  border: none;
+  cursor: pointer;
+
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+#cancelNoteButton {
+  background: #f3f3f3;
+  color: #444;
+}
+
+#cancelNoteButton:hover {
+  background: #e8e8e8;
+}
+
+#saveNoteButton {
+  background: #c8a97e;
+  color: white;
+}
+
+#saveNoteButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(200, 169, 126, 0.35);
+}
+
+#noteGuestName {
+  width: 100%;
+  margin-bottom: 0.75rem;
+
+  padding: 0.9rem 1rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 14px;
+
+  font-size: 1rem;
+  font-family: inherit;
+
+  outline: none;
+  box-sizing: border-box;
+
+  transition: all 0.2s ease;
+}
+
+#noteGuestName:focus {
+  border-color: #c8a97e;
+  box-shadow: 0 0 0 4px rgba(200, 169, 126, 0.15);
+}
+
+@keyframes noteModalFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobil */
+
+@media (max-width: 600px) {
+  .note-modal__content {
+    padding: 1.25rem;
+    border-radius: 20px;
+  }
+
+  .note-modal__content h3 {
+    font-size: 1.25rem;
+  }
+
+  #noteText {
+    min-height: 160px;
+    font-size: 16px; /* iOS zoom problemini önler */
+  }
+
+  .note-modal__actions {
+    flex-direction: column;
+  }
+
+  #cancelNoteButton,
+  #saveNoteButton {
+    width: 100%;
+  }
+}
+
+
+
 @media (max-width: 620px) {
   .hero {
     min-height: 92svh;

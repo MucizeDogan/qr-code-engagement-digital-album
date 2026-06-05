@@ -9,12 +9,15 @@ const state = {
   guestName: "",
   previewUrls: [],
 };
-
+state.flowType = null;
+// "media" | "note"
 const elements = {
   photoButton: document.querySelector("#photoButton"),
   videoButton: document.querySelector("#videoButton"),
+  noteButton: document.querySelector("#noteButton"),
   photoInput: document.querySelector("#photoInput"),
   videoInput: document.querySelector("#videoInput"),
+  noteInput: document.querySelector("#noteInput"),
   review: document.querySelector("#review"),
   guest: document.querySelector("#guest"),
   upload: document.querySelector("#upload"),
@@ -27,31 +30,135 @@ const elements = {
   guestName: document.querySelector("#guestName"),
   progressBar: document.querySelector("#progressBar"),
   uploadStatus: document.querySelector("#uploadStatus"),
+  noteModal: document.querySelector("#noteModal"),
+  noteText: document.querySelector("#noteText"),
+  saveNoteButton: document.querySelector("#saveNoteButton"),
+  cancelNoteButton: document.querySelector("#cancelNoteButton"),
+  noteGuestName: document.querySelector("#noteGuestName"),
 };
 
-elements.photoButton.addEventListener("click", () => elements.photoInput.click());
-elements.videoButton.addEventListener("click", () => elements.videoInput.click());
+// elements.photoButton.addEventListener("click", () => elements.photoInput.click());
+// elements.videoButton.addEventListener("click", () => elements.videoInput.click());
+elements.photoButton.addEventListener("click", () => {
+  state.flowType = "media";
+  elements.photoInput.click();
+});
+
+elements.videoButton.addEventListener("click", () => {
+  state.flowType = "media";
+  elements.videoInput.click();
+});
 elements.addMoreButton.addEventListener("click", () => elements.photoInput.click());
+elements.noteButton.addEventListener("click", () => {
+  state.flowType = "note";
+
+  elements.noteModal.classList.remove("hidden");
+  elements.noteGuestName.value = state.guestName || "";
+  elements.noteText.focus();
+});
+elements.cancelNoteButton.addEventListener("click", () => {
+  elements.noteModal.classList.add("hidden");
+  elements.noteText.value = "";
+});
+
+// elements.cancelNoteButton.addEventListener("click", () => {
+//   elements.noteText.value = "";
+//   elements.noteModal.classList.add("hidden");
+// });
+
+elements.saveNoteButton.addEventListener("click", () => {
+
+  const note = elements.noteText.value.trim();
+
+  if (!note) {
+    alert("Lütfen bir not yazın.");
+    return;
+  }
+
+const senderName = elements.noteGuestName.value.trim();
+
+const txtContent =
+`İrem & Doğan Dijital Anı Albümü
+
+Gönderen: ${senderName || "Misafir"}
+
+Tarih: ${new Date().toLocaleString("tr-TR")}
+
+Mesaj:
+${note}`;
+
+  const blob = new Blob([txtContent], {
+    type: "text/plain"
+  });
+
+  const file = new File(
+    [blob],
+    `not-${Date.now()}.txt`,
+    {
+      type: "text/plain",
+      lastModified: Date.now()
+    }
+  );
+
+  addFiles([file]);
+  state.flowType = "note";
+state.guestName = elements.noteGuestName.value.trim();
+
+  elements.noteText.value = "";
+  elements.noteModal.classList.add("hidden");
+  elements.noteGuestName.value = "";
+});
 
 elements.photoInput.addEventListener("change", (event) => addFiles(event.target.files));
 elements.videoInput.addEventListener("change", (event) => addFiles(event.target.files));
 
+// elements.continueButton.addEventListener("click", () => {
+//   elements.guest.classList.remove("hidden");
+//   elements.guest.scrollIntoView({ behavior: "smooth", block: "start" });
+//   window.setTimeout(() => elements.guestName.focus(), 380);
+// });
+
 elements.continueButton.addEventListener("click", () => {
-  elements.guest.classList.remove("hidden");
-  elements.guest.scrollIntoView({ behavior: "smooth", block: "start" });
-  window.setTimeout(() => elements.guestName.focus(), 380);
+
+  // SADECE MEDIA FLOW'DA isim sor
+  if (state.flowType === "media") {
+
+    elements.guest.classList.remove("hidden");
+    elements.guest.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    window.setTimeout(() => elements.guestName.focus(), 300);
+
+    return;
+  }
+
+  // note flow ise direkt upload'a geç
+  elements.upload.classList.remove("hidden");
+  elements.upload.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  uploadMemories();
+
 });
 
 elements.guestForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   state.guestName = elements.guestName.value.trim();
 
-  if (!state.guestName || state.files.length === 0) {
-    return;
-  }
+  // if (!state.guestName || state.files.length === 0) {
+  //   return;
+  // }
 
-  elements.upload.classList.remove("hidden");
-  elements.upload.scrollIntoView({ behavior: "smooth", block: "start" });
+  // elements.upload.classList.remove("hidden");
+  // elements.upload.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  if (state.flowType === "media") {
+
+    if (!state.guestName || state.files.length === 0) return;
+
+    elements.upload.classList.remove("hidden");
+    elements.upload.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    await uploadMemories();
+  }
 
   try {
     await uploadMemories();
@@ -113,20 +220,85 @@ function renderReview() {
     const item = document.createElement("article");
     item.className = "media-item";
 
-    const preview = document.createElement(file.type.startsWith("video/") ? "video" : "img");
-    const previewUrl = URL.createObjectURL(file);
-    state.previewUrls.push(previewUrl);
-    preview.className = "media-item__preview";
-    preview.src = previewUrl;
-    preview.alt = file.name;
-    preview.muted = true;
-    preview.playsInline = true;
+    // const preview = document.createElement(file.type.startsWith("video/") ? "video" : "img");
+    // const previewUrl = URL.createObjectURL(file);
+    // state.previewUrls.push(previewUrl);
+    // preview.className = "media-item__preview";
+    // preview.src = previewUrl;
+    // preview.alt = file.name;
+    // preview.muted = true;
+    // preview.playsInline = true;
+
+    let preview;
+
+if (file.type.startsWith("video/")) {
+
+  preview = document.createElement("video");
+
+  const previewUrl = URL.createObjectURL(file);
+
+  state.previewUrls.push(previewUrl);
+
+  preview.src = previewUrl;
+  preview.className = "media-item__preview";
+  preview.muted = true;
+  preview.playsInline = true;
+
+}
+else if (file.type.startsWith("image/")) {
+
+  preview = document.createElement("img");
+
+  const previewUrl = URL.createObjectURL(file);
+
+  state.previewUrls.push(previewUrl);
+
+  preview.src = previewUrl;
+  preview.className = "media-item__preview";
+  preview.alt = file.name;
+
+}
+else {
+
+  preview = document.createElement("div");
+
+  preview.className =
+    "media-item__preview media-item__preview--text";
+
+  preview.textContent = "📝";
+}
 
     const text = document.createElement("div");
+    // text.innerHTML = `
+    //   <p class="media-item__title">${escapeHtml(file.name)}</p>
+    //   <p class="media-item__meta">${file.type || "Dosya"} - ${formatFileSize(file.size)}</p>
+    // `;
+
+    if (file.type === "text/plain") {
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+
     text.innerHTML = `
-      <p class="media-item__title">${escapeHtml(file.name)}</p>
-      <p class="media-item__meta">${file.type || "Dosya"} - ${formatFileSize(file.size)}</p>
+      <p class="media-item__title">Misafir Notu</p>
+      <p class="media-item__meta">
+        ${escapeHtml(String(reader.result).substring(0, 120))}
+      </p>
     `;
+  };
+
+  reader.readAsText(file);
+
+} else {
+
+  text.innerHTML = `
+    <p class="media-item__title">${escapeHtml(file.name)}</p>
+    <p class="media-item__meta">
+      ${file.type || "Dosya"} - ${formatFileSize(file.size)}
+    </p>
+  `;
+}
 
     const removeButton = document.createElement("button");
     removeButton.className = "media-item__remove";
